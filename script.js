@@ -3,7 +3,6 @@ $(document).ready(function() {
     const navItems = $('.nav-item');
     const header = $('header');
 
-    // --- Sua Lógica Original de Scroll ---
     $(window).on('scroll', function () {
         const scrollPosition = $(window).scrollTop();
         if (scrollPosition > 10) {
@@ -34,21 +33,17 @@ $(document).ready(function() {
     sr.reveal('#locals .local', { interval: 300 });
     sr.reveal('#avaliacoes_content .feedback', { interval: 300 });
 
-    // --- NOVA LÓGICA DO PROJETO (MODAL + SQL) ---
     const modal = $('#modal-overlay');
     
-    // Abre o modal ao clicar em qualquer botão de agendar
     $('#btn-agendar-nav, #btn-agendar-hero').on('click', function(e) {
         e.preventDefault();
         modal.addClass('open');
     });
 
-    // Fecha o modal
     $('.close-modal').on('click', function() {
         modal.removeClass('open');
     });
 
-    // Simula o envio pro Banco de Dados
     $('#agendamento-form').on('submit', function(e) {
         e.preventDefault();
         
@@ -57,7 +52,6 @@ $(document).ready(function() {
         const dentista = $('#dentista').val();
         const data = $('#data').val().replace('T', ' ');
 
-        // Gerando o comando SQL para mostrar pro professor
         const sqlQuery = `INSERT INTO AGENDAMENTOS (paciente_nome, servico_id, dentista_id, data_inicio, status) VALUES ('${nome}', ${servico}, ${dentista}, '${data}', 'Pendente');`;
 
         console.log("%c[SIMULAÇÃO SQL] Executando no Servidor...", "color: blue; font-weight: bold;");
